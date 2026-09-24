@@ -1,0 +1,52 @@
+<!-- RTL_PATCH_V1: bidi fix - automatic RTL direction for Arabic/Hebrew/Persian/Urdu text -->
+<style id="rtl-patch-style">
+  [dir="auto"]:dir(rtl){text-align:right;}
+</style>
+<script id="rtl-patch">
+(function () {
+  "use strict";
+  if (window.__RTL_PATCH_V1__) return;
+  window.__RTL_PATCH_V1__ = true;
+  var RTL = /[\u0591-\u07FF\u08A0-\u08FF\uFB1D-\uFDFD\uFE70-\uFEFC]/;
+  var SKIP = {SCRIPT:1,STYLE:1,NOSCRIPT:1,TEMPLATE:1,CODE:1,PRE:1,KBD:1,SAMP:1};
+  function ownRtl(el){
+    for (var n = el.firstChild; n; n = n.nextSibling) {
+      if (n.nodeType === 3 && n.nodeValue && RTL.test(n.nodeValue)) return true;
+    }
+    return false;
+  }
+  function fix(el){
+    if (!el || el.nodeType !== 1) return;
+    if (!SKIP[el.tagName] && el.getAttribute("dir") !== "auto" && ownRtl(el)) {
+      el.setAttribute("dir", "auto");
+    }
+    for (var k = el.children, i = 0; i < k.length; i++) fix(k[i]);
+  }
+  function inputs(){
+    try {
+      var l = document.querySelectorAll('textarea, input[type="text"], input[type="search"], input:not([type]), [contenteditable=""], [contenteditable="true"]');
+      for (var i = 0; i < l.length; i++) if (!l[i].getAttribute("dir")) l[i].setAttribute("dir", "auto");
+    } catch (e) {}
+  }
+  function start(){
+    var mo = new MutationObserver(function (ms) {
+      for (var i = 0; i < ms.length; i++) {
+        var m = ms[i];
+        if (m.type === "characterData") { fix(m.target.parentElement); }
+        else for (var j = 0; j < m.addedNodes.length; j++) {
+          var a = m.addedNodes[j];
+          fix(a && a.nodeType === 3 ? a.parentElement : a);
+        }
+      }
+    });
+    var root = document.body || document.documentElement;
+    mo.observe(root, {childList:true, subtree:true, characterData:true});
+    fix(root);
+    inputs();
+    setInterval(inputs, 5000);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+})();
+</script>
+<!-- /RTL_PATCH_V1 -->

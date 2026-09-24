@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-label="arabic-rtl-fix banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#1a2233"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2ea043"/>
+      <stop offset="1" stop-color="#1f6feb"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#f85149"/>
+    </marker>
+    <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2ea043"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="360" rx="18" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1280" height="8" rx="4" fill="url(#accent)"/>
+
+  <!-- broken LTR arrow (top-left emblem) -->
+  <g opacity="0.95">
+    <text x="230" y="48" text-anchor="middle" font-family="Consolas, monospace" font-size="18" fill="#f85149">LTR ✗</text>
+    <line x1="130" y1="72" x2="330" y2="72" stroke="#f85149" stroke-width="5" stroke-dasharray="14 10" marker-end="url(#arr)"/>
+  </g>
+  <!-- correct RTL arrow -->
+  <g>
+    <line x1="330" y1="178" x2="130" y2="178" stroke="#2ea043" stroke-width="6" marker-end="url(#arrG)"/>
+    <text x="230" y="210" text-anchor="middle" font-family="Segoe UI, Tahoma, sans-serif" font-size="21" fill="#2ea043" direction="rtl">عربي سليم ✓</text>
+  </g>
+
+  <text x="660" y="92" text-anchor="middle" font-family="Consolas, 'Cascadia Code', monospace" font-size="56" font-weight="700" fill="#e6edf3">arabic-rtl-fix</text>
+  <text x="660" y="132" text-anchor="middle" font-family="Segoe UI, Tahoma, sans-serif" font-size="24" fill="#9fb0c3" direction="rtl">ترقيع ذكي يُصلح اتجاه النص العربي في تطبيقات Electron — مهارة جاهزة لأي وكيل ذكاء اصطناعي</text>
+
+  <text x="660" y="238" text-anchor="middle" font-family="Consolas, monospace" font-size="19" fill="#7d8da1">dir="auto" · BiDi-safe · auto-backup · one-command rollback</text>
+
+  <!-- app chips -->
+  <g font-family="Segoe UI, Tahoma, sans-serif" font-size="17">
+    <rect x="248" y="266" width="112" height="38" rx="19" fill="#21262d" stroke="#30363d"/>
+    <text x="304" y="291" text-anchor="middle" fill="#c9d1d9">ZCode</text>
+    <rect x="372" y="266" width="140" height="38" rx="19" fill="#21262d" stroke="#30363d"/>
+    <text x="442" y="291" text-anchor="middle" fill="#c9d1d9">Claude Code</text>
+    <rect x="524" y="266" width="106" height="38" rx="19" fill="#21262d" stroke="#30363d"/>
+    <text x="577" y="291" text-anchor="middle" fill="#c9d1d9">Cursor</text>
+    <rect x="642" y="266" width="104" height="38" rx="19" fill="#21262d" stroke="#30363d"/>
+    <text x="694" y="291" text-anchor="middle" fill="#c9d1d9">Slack</text>
+    <rect x="758" y="266" width="110" height="38" rx="19" fill="#21262d" stroke="#30363d"/>
+    <text x="813" y="291" text-anchor="middle" fill="#c9d1d9">Notion</text>
+    <rect x="880" y="266" width="126" height="38" rx="19" fill="#21262d" stroke="#30363d"/>
+    <text x="943" y="291" text-anchor="middle" fill="#c9d1d9">Obsidian</text>
+    <text x="1040" y="291" fill="#586a7d" font-size="20">…</text>
+  </g>
+
+  <text x="640" y="340" text-anchor="middle" font-family="Segoe UI, Tahoma, sans-serif" font-size="16" fill="#586a7d">by Omar Hussein · omar-hussein-portfolio.vercel.app</text>
+</svg>

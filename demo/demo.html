@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<title>arabic-rtl-fix — قبل / بعد</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1117;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 34px; gap: 34px; min-height: 100vh;
+  }
+  .panel {
+    width: 620px; border-radius: 14px; overflow: hidden;
+    background: #161b22; border: 1px solid #30363d;
+    box-shadow: 0 18px 44px rgba(0,0,0,.5);
+  }
+  .panel.bad  { border-color: #b34747; }
+  .panel.good { border-color: #2ea043; }
+  .chrome {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; background: #1c2129; border-bottom: 1px solid #30363d;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .chrome .title { margin-inline-start: 10px; font-size: 13px; color: #8b949e; }
+  .badge {
+    margin-inline-start: auto; font-size: 15px; font-weight: 700;
+    padding: 4px 14px; border-radius: 999px;
+  }
+  .bad  .badge { color: #ffb4b4; background: rgba(179,71,71,.18); border: 1px solid #b34747; }
+  .good .badge { color: #b6f0c2; background: rgba(46,160,67,.16); border: 1px solid #2ea043; }
+  .chat { padding: 20px 18px; display: flex; flex-direction: column; gap: 14px; min-height: 430px; }
+  .msg { padding: 12px 16px; border-radius: 12px; font-size: 16.5px; line-height: 1.85; width: fit-content; max-width: 92%; }
+  .msg .who { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; letter-spacing: .3px; }
+  .user  { background: #1f6feb33; border: 1px solid #1f6feb55; align-self: flex-end; }
+  .user .who  { color: #79c0ff; }
+  .bot   { background: #21262d; border: 1px solid #30363d; align-self: flex-start; }
+  .bot .who   { color: #7ee787; }
+  code { font-family: Consolas, monospace; background: #0d1117; border: 1px solid #30363d; padding: 1.5px 7px; border-radius: 6px; font-size: 14.5px; color: #ffa657; direction: ltr; unicode-bidi: isolate; }
+  .note { font-size: 13px; color: #8b949e; text-align: center; padding: 10px 0 4px; border-top: 1px dashed #30363d; margin-top: auto; }
+  .bad  .note b { color: #ffb4b4; }
+  .good .note b { color: #b6f0c2; }
+
+  /* BEFORE: default LTR app — Arabic comes out left-aligned and scrambled */
+  .bad .msg { direction: ltr; text-align: left; }
+  /* AFTER: the injected patch sets dir=auto — same DOM, correct rendering */
+  .good .msg { text-align: right; }
+</style>
+</head>
+<body>
+
+  <div class="panel bad">
+    <div class="chrome">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="title">MyApp — chat</span>
+      <span class="badge">❌ قبل الترقيع</span>
+    </div>
+    <div class="chat">
+      <div class="msg user"><span class="who">USER</span>السلام عليكم! ممكن تساعدني في كتابة دالة ترتيب؟</div>
+      <div class="msg bot"><span class="who">ASSISTANT</span>وعليكم السلام! أكيد، استخدم sort مع compareFunction هكذا: <code>nums.sort((a, b) =&gt; a - b)</code> وس ترتيب تصاعدي. تريد أيضًا نسخة تنازلية؟</div>
+      <div class="msg bot"><span class="who">ASSISTANT</span>الخطوات: 1) افتح الملف 2) عدّل الدالة 3) احفظ ثم شغّل الاختبارات!</div>
+      <div class="note">default <b>dir = ltr</b> — نص عربي بمحاذاة يسار وترتيب مختلط مربك</div>
+    </div>
+  </div>
+
+  <div class="panel good">
+    <div class="chrome">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="title">MyApp — chat</span>
+      <span class="badge">✅ بعد الترقيع</span>
+    </div>
+    <div class="chat">
+      <div class="msg user" dir="auto"><span class="who">USER</span>السلام عليكم! ممكن تساعدني في كتابة دالة ترتيب؟</div>
+      <div class="msg bot" dir="auto"><span class="who">ASSISTANT</span>وعليكم السلام! أكيد، استخدم sort مع compareFunction هكذا: <code>nums.sort((a, b) =&gt; a - b)</code> وس ترتيب تصاعدي. تريد أيضًا نسخة تنازلية؟</div>
+      <div class="msg bot" dir="auto"><span class="who">ASSISTANT</span>الخطوات: 1) افتح الملف 2) عدّل الدالة 3) احفظ ثم شغّل الاختبارات!</div>
+      <div class="note">the patch injects <b>dir = "auto"</b> — نفس الصفحة تعرض عربيًا سليمًا</div>
+    </div>
+  </div>
+
+</body>
+</html>
