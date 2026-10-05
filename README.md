@@ -11,6 +11,12 @@
   <img alt="Verified" src="https://img.shields.io/badge/verified%20on-ZCode%20Desktop%203.14.3-2ea043">
 </p>
 
+<p align="center">
+  🌐 <a href="https://omarhussien2.github.io/arabic-rtl-fix/"><b>معاينة لايف للديمو</b></a>
+  ·
+  ⬇️ <a href="https://github.com/Omarhussien2/arabic-rtl-fix/releases/latest"><b>حمّل آخر إصدار</b></a>
+</p>
+
 ---
 
 ## 🔍 المشكلة
@@ -96,7 +102,9 @@ arabic-rtl-fix/
 │   ├── alternatives.md         ← حلول RTL للطرفيات وغير Electron
 │   └── troubleshooting.md      ← استكشاف الأخطاء وإصلاحها
 ├── demo/demo.html              ← مصدر صورة قبل/بعد
-├── docs/images/                ← الصور التوضيحية
+├── docs/
+│   ├── index.html              ← صفحة المعاينة اللايفة (GitHub Pages)
+│   └── images/                 ← الصور التوضيحية
 └── install.ps1 · install.sh    ← المثبّتات
 ```
 

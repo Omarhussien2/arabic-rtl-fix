@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>arabic-rtl-fix — معاينة لايف | إصلاح اتجاه النص العربي في تطبيقات Electron</title>
+<meta name="description" content="ديمو تفاعلي: كيف تُصلح مهارة arabic-rtl-fix اتجاه النص العربي (RTL) في تطبيقات Electron بحقنة dir=auto واحدة — قبل وبعد." />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1117; color: #e6edf3;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    min-height: 100vh;
+  }
+  a { color: #58a6ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, .cmd { font-family: Consolas, monospace; direction: ltr; unicode-bidi: isolate; }
+
+  header { text-align: center; padding: 44px 20px 26px; }
+  header h1 { font-size: 30px; letter-spacing: -.3px; }
+  header h1 .en { color: #8b949e; font-size: 20px; display: block; margin-top: 6px; font-weight: 600; }
+  header p.sub { color: #8b949e; margin-top: 12px; font-size: 15.5px; line-height: 1.9; max-width: 760px; margin-inline: auto; }
+  header p.sub b { color: #e6edf3; }
+
+  .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+  .btn {
+    display: inline-block; padding: 10px 20px; border-radius: 10px;
+    font-weight: 700; font-size: 14.5px; border: 1px solid #30363d;
+    background: #21262d; color: #e6edf3; transition: .15s;
+  }
+  .btn:hover { border-color: #58a6ff; text-decoration: none; }
+  .btn.green { background: #238636; border-color: #2ea043; }
+  .btn.green:hover { background: #2ea043; }
+
+  .cmd-wrap { display: flex; justify-content: center; margin-top: 14px; }
+  .cmd {
+    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 12px 18px; font-size: 15px; color: #ffa657;
+    cursor: pointer; user-select: all;
+  }
+  .cmd:hover { border-color: #58a6ff; }
+
+  .stage {
+    display: flex; justify-content: center; align-items: stretch;
+    flex-wrap: wrap; gap: 26px; padding: 26px 20px 10px;
+  }
+  .panel {
+    width: 560px; max-width: 96vw; border-radius: 14px; overflow: hidden;
+    background: #161b22; border: 1px solid #30363d;
+    box-shadow: 0 18px 44px rgba(0,0,0,.5);
+  }
+  .panel.bad  { border-color: #b34747; }
+  .panel.good { border-color: #2ea043; }
+  .chrome {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; background: #1c2129; border-bottom: 1px solid #30363d;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .chrome .title { margin-inline-start: 10px; font-size: 13px; color: #8b949e; }
+  .badge {
+    margin-inline-start: auto; font-size: 14px; font-weight: 700;
+    padding: 4px 14px; border-radius: 999px;
+  }
+  .bad  .badge { color: #ffb4b4; background: rgba(179,71,71,.18); border: 1px solid #b34747; }
+  .good .badge { color: #b6f0c2; background: rgba(46,160,67,.16); border: 1px solid #2ea043; }
+  .chat { padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; min-height: 360px; }
+  .msg { padding: 11px 15px; border-radius: 12px; font-size: 15.5px; line-height: 1.85; width: fit-content; max-width: 92%; }
+  .msg .who { display: block; font-size: 11.5px; font-weight: 700; margin-bottom: 5px; letter-spacing: .3px; }
+  .user  { background: #1f6feb33; border: 1px solid #1f6feb55; align-self: flex-end; }
+  .user .who  { color: #79c0ff; }
+  .bot   { background: #21262d; border: 1px solid #30363d; align-self: flex-start; }
+  .bot .who   { color: #7ee787; }
+  .msg code { background: #0d1117; border: 1px solid #30363d; padding: 1.5px 7px; border-radius: 6px; font-size: 13.5px; color: #ffa657; }
+  .note { font-size: 12.5px; color: #8b949e; text-align: center; padding: 9px 0 3px; border-top: 1px dashed #30363d; margin-top: auto; }
+  .bad  .note b { color: #ffb4b4; }
+  .good .note b { color: #b6f0c2; }
+  .bad  .msg { direction: ltr; text-align: left; }
+  .good .msg { text-align: right; }
+
+  .how { max-width: 860px; margin: 26px auto 0; padding: 0 20px 20px; color: #8b949e; font-size: 14.5px; line-height: 2; text-align: center; }
+  .how b { color: #e6edf3; }
+  footer { text-align: center; color: #8b949e; font-size: 13px; padding: 18px 0 34px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🇸🇦 arabic-rtl-fix
+    <span class="en">Fix Arabic RTL direction in Electron apps — one dir="auto" at a time</span>
+  </h1>
+  <p class="sub">
+    مهارة (Skill) ينفّذها أي وكيل ذكاء اصطناعي — ZCode، Claude Code، Cursor —
+    لتُصلح اتجاه النص العربي في تطبيقات سطح المكتب المبنية على Electron.
+    <b>هذه صفحة حية:</b> نفس الرسائل على اليمين واليسار — الفرق الوحيد
+    حقنة <code>dir="auto"</code> واحدة.
+  </p>
+  <div class="actions">
+    <a class="btn green" href="https://github.com/Omarhussien2/arabic-rtl-fix">⭐ المستودع على GitHub</a>
+    <a class="btn" href="https://github.com/Omarhussien2/arabic-rtl-fix/releases/latest">⬇️ آخر إصدار</a>
+  </div>
+  <div class="cmd-wrap">
+    <div class="cmd" title="اضغط للنسخ" onclick="navigator.clipboard && navigator.clipboard.writeText(this.textContent.trim())">npx skills add Omarhussien2/arabic-rtl-fix</div>
+  </div>
+</header>
+
+<div class="stage">
+
+  <div class="panel bad">
+    <div class="chrome">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="title">MyApp — chat</span>
+      <span class="badge">❌ قبل الترقيع</span>
+    </div>
+    <div class="chat">
+      <div class="msg user"><span class="who">USER</span>السلام عليكم! ممكن تساعدني في كتابة دالة ترتيب؟</div>
+      <div class="msg bot"><span class="who">ASSISTANT</span>وعليكم السلام! أكيد، استخدم sort مع compareFunction هكذا: <code>nums.sort((a, b) =&gt; a - b)</code> وس ترتيب تصاعدي. تريد أيضًا نسخة تنازلية؟</div>
+      <div class="msg bot"><span class="who">ASSISTANT</span>الخطوات: 1) افتح الملف 2) عدّل الدالة 3) احفظ ثم شغّل الاختبارات!</div>
+      <div class="note">default <b>dir = ltr</b> — نص عربي بمحاذاة يسار وترتيب مختلط مربك</div>
+    </div>
+  </div>
+
+  <div class="panel good">
+    <div class="chrome">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="title">MyApp — chat</span>
+      <span class="badge">✅ بعد الترقيع</span>
+    </div>
+    <div class="chat">
+      <div class="msg user" dir="auto"><span class="who">USER</span>السلام عليكم! ممكن تساعدني في كتابة دالة ترتيب؟</div>
+      <div class="msg bot" dir="auto"><span class="who">ASSISTANT</span>وعليكم السلام! أكيد، استخدم sort مع compareFunction هكذا: <code>nums.sort((a, b) =&gt; a - b)</code> وس ترتيب تصاعدي. تريد أيضًا نسخة تنازلية؟</div>
+      <div class="msg bot" dir="auto"><span class="who">ASSISTANT</span>الخطوات: 1) افتح الملف 2) عدّل الدالة 3) احفظ ثم شغّل الاختبارات!</div>
+      <div class="note">the patch injects <b>dir = "auto"</b> — نفس الصفحة تعرض عربيًا سليمًا</div>
+    </div>
+  </div>
+
+</div>
+
+<p class="how">
+  <b>إزاي بتشتغل؟</b> الوكيل الذكي يقرأ <b>SKILL.md</b> ويتابع إجراء آمن من خمس خطوات:
+  يكتشف تطبيق Electron ← يفحص حماية سلامة الأرشيف ← يستخرج نسخة آمنة ← يحقن snippet الـ RTL ←
+  يفعّل مراقب يعيد الترجيع تلقائيًا بعد التحديثات. <b>صفر حذف، تراجع بأمر واحد.</b>
+  تفاصيل الحدود المعروفة (طرفيات xterm.js مثلًا) موثّقة في المستودع.
+</p>
+
+<footer>
+  MIT · صُنع بشغف من أجل مستخدم عربي أفضل 🌙 ·
+  <a href="https://github.com/Omarhussien2/arabic-rtl-fix">Omarhussien2/arabic-rtl-fix</a>
+</footer>
+
+</body>
+</html>
