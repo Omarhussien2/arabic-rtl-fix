@@ -119,7 +119,7 @@ arabic-rtl-fix/
 
 ## 👤 المؤلف
 
-**Omar Hussein** — مطور ومهتم بتجربة المستخدم العربي في الأدوات التقنية
+**Omar Hussein** — مطور هاوي  ومهتم بتجربة المستخدم العربي في الأدوات التقنية
 
 🌐 [الموقع والمعرض: omar-hussein-portfolio.vercel.app](https://omar-hussein-portfolio.vercel.app/)
 
