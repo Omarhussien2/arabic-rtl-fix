@@ -7,14 +7,16 @@
 <p align="center">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-green.svg"></a>
   <img alt="Platforms" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue">
-  <img alt="Works with" src="https://img.shields.io/badge/works%20with-ZCode%20%C2%B7%20Claude%20Code%20%C2%B7%20Cursor%20%C2%B7%20any%20agent-8957e5">
-  <img alt="Verified" src="https://img.shields.io/badge/verified%20on-ZCode%20Desktop%203.14.3-2ea043">
+  <img alt="Works with" src="https://img.shields.io/badge/works%20with-Antigravity%20%C2%B7%20ZCode%20%C2%B7%20Claude%20Code%20%C2%B7%20Cursor%20%C2%B7%20any%20agent-8957e5">
+  <img alt="Verified" src="https://img.shields.io/badge/verified%20on-Antigravity%20%26%20ZCode-2ea043">
 </p>
 
 <p align="center">
   🌐 <a href="https://omarhussien2.github.io/arabic-rtl-fix/"><b>معاينة لايف للديمو</b></a>
   ·
   ⬇️ <a href="https://github.com/Omarhussien2/arabic-rtl-fix/releases/latest"><b>حمّل آخر إصدار</b></a>
+  ·
+  🛒 <a href="https://www.agensi.io/skills/arabic-rtl-fix"><b>متوفرة على Agensi</b></a>
 </p>
 
 ---
@@ -48,6 +50,8 @@
 
 ## 📦 التثبيت
 
+> 🆕 **المهارة منشورة الآن على منصة Agensi مجانًا:** [agensi.io/skills/arabic-rtl-fix](https://www.agensi.io/skills/arabic-rtl-fix)
+
 **الطريقة 1 — بسطر واحد (المُوصى بها):**
 
 ```bash
@@ -78,7 +82,8 @@ git clone https://github.com/Omarhussien2/arabic-rtl-fix ~/.agents/skills/arabic
 
 ## 🧪 حالة الاختبار الموثّقة
 
-رُقّع بنجاح **ZCode Desktop v3.14.3** على Windows 10: الدردشة والمحرر والمعاينات وحقول الكتابة أصبحت تعرض العربية RTL سليمة، مع تراجع مُختبر، ومراقب تبديل تلقائي مُختبر، ومستخدم أكّد النتيجة. سجلات التحقق في الجلسة الأصلية.
+- **Google Antigravity 2.21.1** على Windows 11: نجح الترقيع بسهولة تامة عبر حقن `preload.js` وتفعيل مراقب التبديل التلقائي (`watch-swap`)، وأصبحت كافة المحادثات وحقول الإدخال تدعم RTL بسلاسة.
+- **ZCode Desktop v3.14.3** على Windows 10: الدردشة والمحرر والمعاينات وحقول الكتابة أصبحت تعرض العربية RTL سليمة، مع تراجع مُختبر، ومراقب تبديل تلقائي مُختبر، ومستخدم أكّد النتيجة. سجلات التحقق في الجلسة الأصلية.
 
 ## ⚠️ حدود معروفة (شفافية كاملة)
 
@@ -122,6 +127,8 @@ arabic-rtl-fix/
 
 ## 🇬🇧 English Summary
 
-**arabic-rtl-fix** is an AI-agent skill that repairs Arabic (and Hebrew/Persian/Urdu) text direction in Electron desktop apps. Chromium already shapes the letters — the breakage is direction: pages default to `dir=ltr`, so Arabic renders left-aligned with scrambled mixed lines. The skill guides any agent (ZCode, Claude Code, Cursor…) through a safe, verified procedure: detect Electron → check fuses → extract asar → inject a tiny `dir="auto"` snippet → swap with an auto-watcher that activates on app quit. Zero deletions, automatic backup, one-command rollback, re-apply script for post-update recovery. Verified end-to-end on ZCode Desktop 3.14.3 (Windows). Terminal panels (xterm.js) are out of scope — see `references/alternatives.md`. MIT licensed.
+**arabic-rtl-fix** is an AI-agent skill that repairs Arabic (and Hebrew/Persian/Urdu) text direction in Electron desktop apps. Chromium already shapes the letters — the breakage is direction: pages default to `dir=ltr`, so Arabic renders left-aligned with scrambled mixed lines. The skill guides any agent (Antigravity, ZCode, Claude Code, Cursor…) through a safe, verified procedure: detect Electron → check fuses → extract asar → inject a tiny `dir="auto"` snippet → swap with an auto-watcher that activates on app quit. Zero deletions, automatic backup, one-command rollback, re-apply script for post-update recovery. Verified end-to-end on **Google Antigravity** and **ZCode Desktop 3.14.3** (Windows). Terminal panels (xterm.js) are out of scope — see `references/alternatives.md`. MIT licensed.
+
+🛒 **Also available on Agensi (free):** [agensi.io/skills/arabic-rtl-fix](https://www.agensi.io/skills/arabic-rtl-fix)
 
 > صُنع بشغف من أجل مستخدم عربي أفضل 🌙

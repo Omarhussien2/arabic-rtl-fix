@@ -1,6 +1,6 @@
 ---
 name: arabic-rtl-fix
-description: Fix reversed / left-to-right RTL text (Arabic, Hebrew, Persian, Urdu) in Electron desktop apps by injecting a dir="auto" bidi patch into the app's renderer. Use whenever the user complains that Arabic appears left-to-right, reversed, disconnected, or badly formatted in a desktop app (ZCode, Claude Code, Cursor, Slack, Discord, Notion, Obsidian, Postman, etc.), says something like العربي معكوس / مقلوب / من الشمال لليمين / مش مفهوم في التطبيق, asks to add RTL or bidi support to a desktop app, or asks to re-apply / roll back the Arabic patch after an app update. Covers Electron detection, fuse safety checks, patching, auto-swap watcher, rollback, and non-Electron alternatives.
+description: Fix reversed / left-to-right RTL text (Arabic, Hebrew, Persian, Urdu) in Electron desktop apps by injecting a dir="auto" bidi patch into the app's renderer. Use whenever the user complains that Arabic appears left-to-right, reversed, disconnected, or badly formatted in a desktop app (Antigravity, ZCode, Claude Code, Cursor, Slack, Discord, Notion, Obsidian, Postman, etc.), says something like العربي معكوس / مقلوب / من الشمال لليمين / مش مفهوم في التطبيق, asks to add RTL or bidi support to a desktop app, or asks to re-apply / roll back the Arabic patch after an app update. Covers Electron detection, fuse safety checks, patching, auto-swap watcher, rollback, and non-Electron alternatives.
 ---
 
 # Arabic RTL Fix for Electron Apps
